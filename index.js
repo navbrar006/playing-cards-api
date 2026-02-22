@@ -11,9 +11,28 @@
 // app.listen(3000,()=>
 //  console.log("Server running on port 3000"));
 
+// import express from "express";
+// import { connectDB } from "./config/db.js";
+// import cardsRouter from "./routes/cards.routes.js"; // 👈 .js REQUIRED
+
+// const app = express();
+
+// // middleware
+// app.use(express.json());
+
+// // connect DB
+// connectDB();
+
+// // routes
+// app.use("/api/v1/cards", cardsRouter);
+
+// // server
+// app.listen(3000, () => {
+//   console.log("🚀 Server running on port 3000");
+// });
 import express from "express";
 import { connectDB } from "./config/db.js";
-import cardsRouter from "./routes/cards.routes.js"; // 👈 .js REQUIRED
+import cardsRouter from "./routes/cards.routes.js";
 
 const app = express();
 
@@ -24,12 +43,16 @@ app.use(express.json());
 connectDB();
 
 // routes
+app.get("/", (req, res) => {
+  res.send("✅ API Running");
+});
+
 app.use("/api/v1/cards", cardsRouter);
 
 // server
-app.listen(3000, () => {
-  console.log("🚀 Server running on port 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
-
 
 

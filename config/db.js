@@ -13,19 +13,32 @@
 //     process.exit(1);
 //   }
 // }
+// import mongoose from "mongoose";
+
+// export const connectDB = async () => {
+//   try {
+//     await mongoose.connect(
+//       "mongodb+srv://navbrar006_db_user:navkiran2006@cluster0.kexnjhw.mongodb.net/Experiment4"
+//     );
+//     console.log("✅ MongoDB connected");
+//   } catch (error) {
+//     console.log("❌ MongoDB connection failed:", error.message);
+//     process.exit(1);
+//   }
+// };
 import mongoose from "mongoose";
 
 export const connectDB = async () => {
   try {
     await mongoose.connect(
-      "mongodb+srv://navbrar006_db_user:navkiran2006@cluster0.kexnjhw.mongodb.net/Experiment4"
-    );
+  "mongodb+srv://navbrar006_db_user:navkiran2006@cluster0.kexnjhw.mongodb.net/"
+);
+
     console.log("✅ MongoDB connected");
   } catch (error) {
     console.log("❌ MongoDB connection failed:", error.message);
     process.exit(1);
   }
 };
-
 
 
