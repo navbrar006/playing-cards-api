@@ -30,6 +30,9 @@
 // app.listen(3000, () => {
 //   console.log("🚀 Server running on port 3000");
 // });
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import { connectDB } from "./config/db.js";
 import cardsRouter from "./routes/cards.routes.js";

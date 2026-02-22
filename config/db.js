@@ -30,9 +30,7 @@ import mongoose from "mongoose";
 
 export const connectDB = async () => {
   try {
-    await mongoose.connect(
-  "mongodb+srv://navbrar006_db_user:navkiran2006@cluster0.kexnjhw.mongodb.net/"
-);
+    await mongoose.connect(process.env.MONGO_URI);
 
     console.log("✅ MongoDB connected");
   } catch (error) {

@@ -1,18 +1,15 @@
 import express from "express";
-import {
-  createCard,
-  getCards,
-  getCardById,
-  updateCard,
-  deleteCard
-} from "../controllers/cards.controller.js";
+import { getAllCards, createCard } from "../controllers/cards.controller.js";
 
 const router = express.Router();
 
-router.post("/", createCard);
-router.get("/", getCards);
-router.get("/:id", getCardById);
-router.put("/:id", updateCard);
-router.delete("/:id", deleteCard);
+// Test route (to confirm router is connected)
+router.get("/", (req, res) => {
+  res.json({ message: "✅ /api/v1/cards route working" });
+});
+
+// Actual APIs
+router.get("/all", getAllCards);
+router.post("/create", createCard);
 
 export default router;
