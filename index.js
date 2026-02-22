@@ -39,23 +39,32 @@ import cardsRouter from "./routes/cards.routes.js";
 
 const app = express();
 
-// middleware
 app.use(express.json());
 
-// connect DB
-connectDB();
-
-// routes
+// Root route
 app.get("/", (req, res) => {
-  res.send("✅ API Running");
+  res.send("✅ API Running on Vercel");
 });
 
+// DB connect middleware (important for serverless)
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error("DB error:", err.message);
+    res.status(500).json({ error: "Database connection failed" });
+  }
+});
+
+// Routes
 app.use("/api/v1/cards", cardsRouter);
 
-// server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+// ❗ Vercel ke liye export
+export default app;
 
-
+// ❗ Local ke liye hi listen
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+}
